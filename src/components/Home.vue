@@ -13,7 +13,7 @@
 
     <input
       type="text"
-      placeholder="POI搜索功能正在开发中...开发完成后此处可搜索"
+      placeholder="try to search something"
       ref="search"
       @click="changeColor"
       @blur="backColor"

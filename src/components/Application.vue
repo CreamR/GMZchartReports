@@ -30,7 +30,7 @@
               sortable
               :sort-method="
                 (a, b) => {
-                  return a.deathNum - b.deathNum
+                  return a.value - b.value
                 }
               "
             />
@@ -40,7 +40,7 @@
               sortable
               :sort-method="
                 (a, b) => {
-                  return a.deathNum - b.deathNum
+                  return a.cureNum - b.cureNum
                 }
               "
             />
