@@ -6,6 +6,6 @@ Using about Vue3 + router + pinia.
 This is my graduate composition for 2024.
 
 ## Usage
-clone this repositorie and install all of dependencies
+clone this repositorie and install all of the dependencies
 enjoy it!
 
