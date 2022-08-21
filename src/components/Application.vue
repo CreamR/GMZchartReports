@@ -115,7 +115,7 @@ import theMap from './app-section/Map.vue'
 import theBarMap from './app-section/BarMap.vue'
 import theSingleMap from './app-section/SingleMap.vue'
 import { StarFilled } from '@element-plus/icons-vue'
-import { ref, reactive, onMounted, nextTick } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 
 import { ElLoading } from 'element-plus'
 
@@ -133,7 +133,7 @@ onMounted(async () => {
   } catch (error) {
     console.log(error)
   }
-  loadingInstance.close()
+  await loadingInstance.close()
 })
 
 class timer {
