@@ -88,12 +88,8 @@
               </div>
 
               <el-form-item>
-                <div class="wrapButton">
-                  <el-button type="primary" @click="submitForm()"
-                    >注册</el-button
-                  >
-                  <el-button @click="resetForm()">重置</el-button>
-                </div>
+                <el-button type="primary" @click="submitForm()">注册</el-button>
+                <el-button @click="resetForm()">重置</el-button>
               </el-form-item>
             </div>
           </el-form>

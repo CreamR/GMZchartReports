@@ -18,6 +18,8 @@
       @click="changeColor"
       @blur="backColor"
     />
+
+    <!-- dark mode -->
     <el-tooltip content="点击切换显示模式" effect="light">
       <el-button
         @click="toggleDark()"
@@ -28,7 +30,45 @@
         >暗黑模式</el-button
       >
     </el-tooltip>
+    <el-icon class="modeSetting" @click="drawer = true"><Setting /></el-icon>
+    <el-drawer v-model="drawer" :title="turn" size="22%" direction="ltr">
+      <div class="demo-time-range">
+        <h5>起始时间</h5>
+        <el-time-select
+          v-model="starTime"
+          :max-time="endTime"
+          placeholder="开始"
+          start="00:00"
+          step="00:15"
+          size="large"
+          end="23:45"
+        />
+        <h5>结束时间</h5>
+        <el-time-select
+          v-model="endTime"
+          :min-time="starTime"
+          placeholder="结束"
+          start="00:00"
+          step="00:15"
+          size="large"
+          end="23:45"
+        />
+        <el-switch
+          v-model="ON"
+          inline-prompt
+          :active-icon="Check"
+          :inactive-icon="Close"
+          @click="confirm"
+        />
+      </div>
+      <div class="contentWrap">
+        <h3>made by Gmz✨✨✨</h3>
+        <h4>Computer Science, Front end orientation</h4>
+        <h5>GMZchartReport已经逐渐开发完毕, 目前已传至GitHub仓库</h5>
+      </div>
+    </el-drawer>
 
+    <!-- user display control section -->
     <div class="isComponent" v-if="exist">
       <el-avatar
         style="vertical-align: middle"
@@ -119,34 +159,16 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useDark, useToggle } from '@vueuse/core'
 import router from '../router'
-import { StarFilled } from '@element-plus/icons-vue'
+import { StarFilled, Setting, Check, Close } from '@element-plus/icons-vue'
 import ScrollReveal from 'scrollreveal'
 import { storeIP } from '../store/pinia'
 // component
 import notification from './app-section/Notification.vue'
 
-//scrollRevealJS
-// let logoAnimate = {
-//   delay: 1888,
-//   duration: 999,
-//   origin: 'bottom',
-//   distance: '22.22px',
-// }
-// let inputAnimate = {
-//   delay: 1111,
-//   duration: 888,
-//   origin: 'bottom',
-//   distance: '22.22px',
-// }
-// let tempAnimate = {
-//   delay: 555,
-//   duration: 666,
-//   origin: 'bottom',
-//   distance: '22.22px',
-// }
+// animate section
 class Animate {
   logoAnimate = {
     delay: 1888,
@@ -186,7 +208,7 @@ const toggleDark = useToggle(isDark)
 const search = ref(null)
 
 const changeColor = () => {
-  search.value.style.border = '2.22px solid black'
+  search.value.style.border = '2.22px solid skyblue'
 }
 const backColor = () => {
   search.value.style.border = '1px solid darkgrey'
@@ -209,6 +231,75 @@ const getIP = async () => {
     console.log(error)
   }
 }
+
+//control the setting of dark mode
+let drawer = ref(false)
+let starTime = ref('')
+let endTime = ref('')
+let ON = ref(false)
+let turn = ref('')
+
+if (
+  (localStorage.getItem('darkModeStarTime') != '' &&
+    localStorage.getItem('darkModeEndTime')) != ''
+) {
+  turn = '暗黑模式-已定时'
+} else {
+  turn = '暗黑模式-未定时'
+}
+
+const runCheck = () => {
+  const nowHour = new Date().getHours()
+  const nowMin = new Date().getMinutes()
+  const setedStarTime = localStorage.getItem('darkModeStarTime')
+  const setedEndTime = localStorage.getItem('darkModeEndTime')
+  if (setedStarTime.slice(0, 2) <= nowHour) {
+    if (
+      setedStarTime.slice(0, 2) == nowHour &&
+      setedStarTime.slice(3, 5) > nowMin
+    ) {
+      console.log('invalid time')
+      // set common mode
+      localStorage.setItem('vueuse-color-scheme', 'auto')
+    } else {
+      if (setedEndTime.slice(0, 2) >= nowHour) {
+        if (
+          setedEndTime.slice(0, 2) == nowHour &&
+          setedEndTime.slice(3, 5) < nowMin
+        ) {
+          console.log('invalid time')
+          // set common mode
+          localStorage.setItem('vueuse-color-scheme', 'auto')
+        } else {
+          // set dark mode
+          localStorage.setItem('vueuse-color-scheme', 'dark')
+        }
+      }
+    }
+  } else {
+    console.log('invalid time')
+    // set common mode
+    localStorage.setItem('vueuse-color-scheme', 'auto')
+  }
+}
+
+runCheck()
+
+watch(ON, (newVal) => {
+  if (newVal) {
+    localStorage.setItem('darkModeStarTime', starTime._value)
+    localStorage.setItem('darkModeEndTime', endTime._value)
+
+    runCheck()
+    turn = '暗黑模式-已定时'
+  } else {
+    localStorage.setItem('vueuse-color-scheme', 'auto')
+  }
+})
+
+setInterval(() => {
+  runCheck()
+}, 11111)
 </script>
 
 <style lang="less" scoped>
@@ -279,6 +370,43 @@ h2 {
   top: 8.88vw;
   left: 9.99vw;
 }
+.modeSetting {
+  position: absolute;
+  top: 9.29vw;
+  left: 14.58vw;
+
+  cursor: pointer;
+}
+.el-drawer {
+  position: relative;
+  .demo-time-range {
+    // margin-left: 0.11vw;
+    border-radius: 1.11vw;
+    padding: 1.88vw;
+    padding-bottom: 2.22vw;
+    box-shadow: 2.2px 2.2px 6.6px rgba(172, 180, 201, 0.5);
+    h5 {
+      margin: 0.48vw 0.18vw;
+    }
+    .el-switch {
+      position: absolute;
+      top: 1.11vw;
+      left: 7.88vw;
+
+      text-align: center;
+    }
+  }
+  .contentWrap {
+    border-radius: 1.11vw;
+    padding: 1.88vw;
+    padding-bottom: 2.22vw;
+    box-shadow: 2.2px 2.2px 6.6px rgba(172, 180, 201, 0.5);
+
+    text-align: center;
+    margin-top: 3.88vw;
+  }
+}
+
 ul {
   position: absolute;
   top: 8.88vw;

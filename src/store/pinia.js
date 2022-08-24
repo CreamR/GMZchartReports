@@ -6,5 +6,4 @@ export const storeIP = defineStore('storeIP', {
       ipAnalyes: 'IPaddress',
     }
   },
-  getters: {},
 })
