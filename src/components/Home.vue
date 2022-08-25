@@ -253,19 +253,19 @@ const runCheck = () => {
   const nowMin = new Date().getMinutes()
   const setedStarTime = localStorage.getItem('darkModeStarTime')
   const setedEndTime = localStorage.getItem('darkModeEndTime')
-  if (setedStarTime.slice(0, 2) <= nowHour) {
+  if (parseInt(setedStarTime.slice(0, 2)) <= nowHour) {
     if (
-      setedStarTime.slice(0, 2) == nowHour &&
-      setedStarTime.slice(3, 5) > nowMin
+      parseInt(setedStarTime.slice(0, 2)) == nowHour &&
+      parseInt(setedStarTime.slice(3, 5)) > nowMin
     ) {
       console.log('invalid time')
       // set common mode
       localStorage.setItem('vueuse-color-scheme', 'auto')
     } else {
-      if (setedEndTime.slice(0, 2) >= nowHour) {
+      if (parseInt(setedEndTime.slice(0, 2)) >= nowHour) {
         if (
-          setedEndTime.slice(0, 2) == nowHour &&
-          setedEndTime.slice(3, 5) < nowMin
+          parseInt(setedEndTime.slice(0, 2)) == nowHour &&
+          parseInt(setedEndTime.slice(3, 5)) < nowMin
         ) {
           console.log('invalid time')
           // set common mode

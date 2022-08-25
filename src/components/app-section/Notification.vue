@@ -50,6 +50,16 @@ const nofify = reactive([
     date: '2022-08-24 19:09',
     data: '新增定时暗黑模式功能, 可动态重置暗黑模式',
   },
+  {
+    version: '1.4.1',
+    date: '2022-08-25 14:33',
+    data: '给设置时间添加了类型诊断, 避免了String与Number进行比较出现的错误结果',
+  },
+  {
+    version: '1.4.2',
+    date: '2022-08-25 14:38',
+    data: '完善了一些小细节, GMZchartReports项目开发完毕, GitHub搜索CreamR即可找到本仓库',
+  },
 ])
 </script>
 
