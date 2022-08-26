@@ -116,6 +116,7 @@ import theBarMap from './app-section/BarMap.vue'
 import theSingleMap from './app-section/SingleMap.vue'
 import { StarFilled } from '@element-plus/icons-vue'
 import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { ElLoading } from 'element-plus'
 
@@ -123,6 +124,7 @@ let dataList = reactive({
   data: [],
 })
 
+const router = useRouter()
 const url = 'https://interface.sina.cn/news/wap/fymap2020_data.d.json'
 onMounted(async () => {
   try {
@@ -132,6 +134,7 @@ onMounted(async () => {
     dataList.data = data.data
   } catch (error) {
     console.log(error)
+    router.push('/somethingWrong')
   }
   await loadingInstance.close()
 })

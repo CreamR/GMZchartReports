@@ -24,6 +24,10 @@ const router = createRouter({
       path: '/home/application',
       component: () => import('./components/Application.vue'),
     },
+    {
+      path: '/somethingWrong',
+      component: () => import('./components/Error.vue'),
+    },
   ],
 })
 

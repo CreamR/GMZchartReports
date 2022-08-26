@@ -60,6 +60,11 @@ const nofify = reactive([
     date: '2022-08-25 14:38',
     data: '完善了一些小细节, GMZchartReports项目开发完毕, GitHub搜索CreamR即可找到本仓库',
   },
+  {
+    version: '1.4.3',
+    date: '2022-08-26 16:37',
+    data: '若数据请求失败或用户网络问题导致空数据则显示错误页面, 从而优化用户体验',
+  },
 ])
 </script>
 
