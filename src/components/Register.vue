@@ -119,9 +119,9 @@ const value = ref()
 const ruleFormRef = ref()
 
 const formLabelAlign = reactive({
-  nickname: '高明昭',
-  password: '123456',
-  collage: 'nothing',
+  nickname: '请输入昵称',
+  password: '请输入密码',
+  collage: '请输入学校',
 })
 
 const resetForm = () => {

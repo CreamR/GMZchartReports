@@ -64,7 +64,7 @@
       <div class="contentWrap">
         <h3>made by Gmz✨✨✨</h3>
         <h4>Computer Science, Front end orientation</h4>
-        <h5>GMZchartReport已经逐渐开发完毕, 目前已传至GitHub仓库</h5>
+        <h5>GMZchartReport已于2022-8-26开发完毕</h5>
       </div>
     </el-drawer>
 
@@ -391,8 +391,7 @@ h2 {
     .el-switch {
       position: absolute;
       top: 1.11vw;
-      left: 7.88vw;
-
+      left: 7.99vw;
       text-align: center;
     }
   }
