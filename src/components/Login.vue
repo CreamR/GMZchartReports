@@ -9,12 +9,7 @@
     <div class="box">
       <el-row>
         <el-col :span="12">
-          <img
-            src="../assets/login.jpg"
-            alt="register"
-            title="register"
-            class="register"
-          />
+          <img src="../assets/login.svg" alt="register" title="register" class="register" />
         </el-col>
         <el-col :span="12">
           <div class="info">
@@ -22,69 +17,47 @@
             <h4>填写您的必要信息</h4>
           </div>
 
-          <el-form
-            label-position="top"
-            label-width="100px"
-            :model="formLabelAlign"
-            style="max-width: 460px"
-            ref="ruleFormRef"
-          >
-            <el-form-item
-              label="昵称"
-              prop="nickname"
-              :rules="[
-                {
-                  required: true,
-                  min: 1,
-                  max: 5,
-                  message: '长度需要在1到5之间',
-                },
-              ]"
-            >
+          <el-form label-position="top" label-width="100px" :model="formLabelAlign" style="max-width: 460px"
+            ref="ruleFormRef">
+            <el-form-item label="昵称" prop="nickname" :rules="[
+              {
+                required: true,
+                min: 1,
+                max: 5,
+                message: '长度需要在1到5之间',
+              },
+            ]">
               <el-input v-model="formLabelAlign.nickname" />
             </el-form-item>
-            <el-form-item
-              label="密码"
-              :rules="[
-                {
-                  required: true,
-                  min: 3,
-                  max: 10,
-                  message: '长度需要在3到10之间',
-                },
-              ]"
-              prop="password"
-            >
+            <el-form-item label="密码" :rules="[
+              {
+                required: true,
+                min: 3,
+                max: 10,
+                message: '长度需要在3到10之间',
+              },
+            ]" prop="password">
               <el-input v-model="formLabelAlign.password" type="password" />
             </el-form-item>
-            <el-form-item
-              label="学校"
-              prop="collage"
-              :rules="[
-                {
-                  required: true,
-                  type: 'string',
-                  message: '只能输入字符',
-                },
-              ]"
-            >
+            <el-form-item label="学校" prop="collage" :rules="[
+              {
+                type: 'string',
+                message: '只能输入字符',
+              },
+            ]">
               <el-input v-model="formLabelAlign.collage" />
             </el-form-item>
 
             <div class="wrap">
               <div class="wrapContent">
                 <div class="vblock">给本项目评个分吧！</div>
-                <el-rate
-                  v-model="value"
-                  :texts="[
-                    '辣鸡！',
-                    '不忍直视！',
-                    '海星！',
-                    '有点牛牛！',
-                    '太牛了哥！',
-                  ]"
-                  show-text
-                />
+                <el-rate v-model="value" :texts="[
+                  '辣鸡！',
+                  '不忍直视！',
+                  '海星！',
+                  '有点牛牛！',
+                  '太牛了哥！',
+                ]" show-text />
               </div>
 
               <el-form-item>
@@ -169,22 +142,27 @@ const submitForm = async () => {
 
     border-radius: 2.22vw;
     box-shadow: 0 1vh 1.88vh 0 rgb(39 48 54 / 20%);
+
     .info {
       margin-bottom: 1.11vw;
     }
+
     .register {
       display: block;
       width: 18.88vw;
       height: 18.88vw;
     }
+
     .vblock {
       color: darkgrey;
       font-size: small;
       margin-bottom: 0.28vw;
     }
+
     .el-rate {
       vertical-align: middle;
     }
+
     .wrap {
       display: flex;
       justify-content: space-between;

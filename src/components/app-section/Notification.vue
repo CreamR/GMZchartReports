@@ -1,7 +1,11 @@
 <template>
   <div class="notification">
+    <el-radio-group v-model="radio">
+      <el-radio :label="1">正序</el-radio>
+      <el-radio :label="2">倒序</el-radio>
+    </el-radio-group>
     <ul>
-      <li v-for="(item, index) in nofify" :key="index">
+      <li v-for="(item, index) in notify" :key="index">
         <h3>Version: {{ item.version }}</h3>
         <h5>Date: {{ item.date }}</h5>
         <p>{{ item.data }}</p>
@@ -12,9 +16,11 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref, watch } from "vue";
 
-const nofify = reactive([
+let radio = ref(1)
+
+let notify = reactive([
   {
     version: "1.0.0",
     date: "2022-08-18 13:24",
@@ -33,7 +39,7 @@ const nofify = reactive([
   {
     version: "1.2.1",
     date: "2022-08-20 14:31",
-    data: "包管理器升级为pnpm, 框架升级为3.2.27 | 部分相同逻辑与用途的功能/变量改为类调用, 清除了一些语法书写上的warning",
+    data: "框架例行更新",
   },
   {
     version: "1.3.0",
@@ -51,42 +57,75 @@ const nofify = reactive([
     data: "新增定时暗黑模式功能, 可动态重置暗黑模式",
   },
   {
-    version: "1.4.1",
-    date: "2022-08-25 14:33",
-    data: "给设置时间添加了类型诊断, 避免了String与Number进行比较出现的错误结果",
-  },
-  {
     version: "1.4.2",
     date: "2022-08-25 14:38",
-    data: "完善了一些小细节, GMZchartReports项目开发完毕, GitHub搜索CreamR即可找到本仓库",
+    data: "完善了一些小细节",
   },
   {
     version: "1.4.3",
     date: "2022-08-26 16:37",
-    data: "若数据请求失败或用户网络问题导致空数据则显示错误页面, 从而优化用户体验",
+    data: "若数据请求失败或用户网络问题导致空数据则显示错误页面",
   },
   {
     version: "1.4.4",
     date: "2022-10-5 16:18",
-    data: "解决了用户第一次进入此APP时, 暗黑模式定时功能初始化其变量导致的重大错误, ⚠⚠注意: 此应用仅适配于电脑屏幕且尺寸中等或以上, 笔记本电脑可能会样式错乱",
+    data: "一些无关代码的删减, ⚠⚠注意: 此应用仅适配于电脑屏幕且尺寸中等或以上, 笔记本电脑可能会样式错乱",
+  },
+
+  {
+    version: "1.4.6",
+    date: "2022-10-19 18:33",
+    data: "一些不必要的代码删减，并减少数据耦合",
+  },
+  {
+    version: "1.4.7",
+    date: "2022-10-19 18:42",
+    data: "对更新日志添加了排序选项",
+  },
+  {
+    version: "1.4.8",
+    date: "2022-10-19 18:55",
+    data: "对isBetween方法添加了TS类型限制",
+  },
+  {
+    version: "1.4.9",
+    date: "2022-10-30 14:17",
+    data: "开发结束, 后续不再维护",
   },
 ]);
+
+// notify.reverse();
+watch(radio, newVal => {
+  if (newVal._value == 2) {
+    notify = notify
+  } else {
+    notify = notify.reverse()
+  }
+})
 </script>
 
 <style lang="less" scoped>
 .notification {
   margin: 0 auto;
+
+  .el-radio-group {
+    margin-left: 2.22vw;
+  }
+
   ul {
     li {
       display: block;
       margin: 2.22vw;
+
       h3 {
         font-weight: bolder;
       }
+
       h5 {
         font-weight: normal;
         color: #6e7379;
       }
+
       p {
         font-size: normal;
       }
